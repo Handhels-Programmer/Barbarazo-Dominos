@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbarazo Domino</title>
+    <title>BarBarazo Domino</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,7 @@
         }
     </style>
 </head>
-<body class="bg-stone-950 text-stone-100 min-h-screen pb-20 selection:bg-amber-500 selection:text-black">
+<body class="bg-stone-950 text-stone-100 min-h-screen pb-20 selection:bg-amber-500 selection:text-black flex flex-col">
 
     <!-- NAVBAR -->
     <header class="bg-stone-900 border-b border-amber-900/30 sticky top-0 z-30 shadow-lg shadow-black/50">
@@ -45,21 +45,21 @@
                 <div class="relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-amber-600 to-orange-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
                     <div class="relative bg-stone-900 p-1 rounded-lg border border-amber-800">
-                        <img src="Logo.jpg" alt="Logo" class="h-12 w-12 rounded object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <img src="Logo.png" alt="Logo" class="h-12 w-12 rounded object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <i data-lucide="beer" class="text-amber-500 w-10 h-10 hidden"></i>
                     </div>
                 </div>
                 
                 <div class="flex flex-col">
                     <h1 class="text-2xl font-bold hidden sm:block text-white uppercase" style="text-shadow: 2px 2px 0px #78350f;">
-                        Barbarazo
+                        BarBarazo
                     </h1>
-                    <span class="text-xs text-amber-500 font-medium tracking-widest hidden sm:block">DOMINO CLUB</span>
+                    <span class="text-xs text-amber-500 font-medium tracking-widest hidden sm:block">@Bar.Barazo</span>
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <!-- Estado Conexión (MEJORADO) -->
+                <!-- Estado Conexión -->
                 <div class="flex items-center gap-2 bg-stone-950/50 px-3 py-1.5 rounded-full border border-stone-800">
                     <div id="connection-status" class="h-2.5 w-2.5 rounded-full bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.5)] transition-colors duration-500"></div>
                     <span id="connection-text" class="text-[10px] uppercase font-bold text-stone-500 tracking-wider">Desconectado</span>
@@ -67,7 +67,7 @@
 
                 <!-- Controles de Usuario -->
                 <div id="admin-controls" class="hidden flex items-center gap-2 bg-stone-800 rounded-lg p-1 border border-amber-500/30 shadow-inner">
-                    <span class="px-3 py-1 bg-amber-600 text-stone-900 rounded text-xs font-bold shadow brand-font">ADMIN</span>
+                    <span id="admin-badge" class="px-3 py-1 bg-amber-600 text-stone-900 rounded text-xs font-bold shadow brand-font uppercase">ADMIN</span>
                     <button onclick="window.app.logoutAdmin()" class="p-1 text-stone-400 hover:text-red-400 transition-colors" title="Salir">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
                     </button>
@@ -85,14 +85,14 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-4 pt-8">
+    <main class="max-w-7xl mx-auto p-4 pt-8 w-full flex-grow">
         
         <!-- DASHBOARD (Solo Admin) -->
         <div id="dashboard-stats" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
             <!-- Inyectado por JS -->
         </div>
 
-        <!-- BARRA DE ACCIÓN (Crear Mesa) -->
+        <!-- BARRA DE ACCIÓN (Crear Mesa - Solo Admin) -->
         <div id="action-bar" class="hidden mb-8 flex gap-3 fade-in bg-stone-900 p-4 rounded-xl border border-stone-800 shadow-xl">
             <input type="text" id="new-table-name" placeholder="Nombre de la nueva mesa..." 
                 class="bg-stone-950 border-stone-700 border rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:outline-none w-full placeholder-stone-600">
@@ -112,11 +112,8 @@
             <div class="overflow-x-auto max-h-[60vh]">
                 <table class="w-full text-left text-sm text-stone-400">
                     <thead class="bg-stone-950 text-stone-300 uppercase font-medium sticky top-0 border-b border-stone-800">
-                        <tr>
-                            <th class="px-6 py-4">Mesa</th>
-                            <th class="px-6 py-4">Fecha/Hora</th>
-                            <th class="px-6 py-4">Jugadores</th>
-                            <th class="px-6 py-4 text-right">Total</th>
+                        <tr id="history-header">
+                            <!-- Inyectado por JS según Rol -->
                         </tr>
                     </thead>
                     <tbody id="history-list">
@@ -141,12 +138,38 @@
 
     </main>
 
+    <!-- FOOTER REDES SOCIALES -->
+    <footer class="bg-stone-900 border-t border-amber-900/30 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <h4 class="text-white font-bold brand-font text-lg tracking-wider">BarBarazo</h4>
+                <p class="text-stone-500 text-sm mt-1">El mejor ambiente para votar el estrés.</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://instagram.com/Bar.Barazo" target="_blank" class="p-3 bg-stone-800 rounded-full text-stone-400 hover:text-pink-500 hover:bg-stone-700 transition-all border border-stone-700 hover:border-pink-500/30 group" title="Instagram">
+                    <i data-lucide="instagram" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61582862584069" target="_blank" class="p-3 bg-stone-800 rounded-full text-stone-400 hover:text-blue-500 hover:bg-stone-700 transition-all border border-stone-700 hover:border-blue-500/30 group" title="Facebook">
+                    <i data-lucide="facebook" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="https://wa.me/18496382233" target="_blank" class="p-3 bg-stone-800 rounded-full text-stone-400 hover:text-green-500 hover:bg-stone-700 transition-all border border-stone-700 hover:border-green-500/30 group" title="WhatsApp">
+                    <i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="text-stone-600 text-xs">
+                &copy; 2025 ProgrAppWeb.<br>WS: 1 (829) 913-5723<br>Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
     <!-- MODAL LOGIN ADMIN -->
     <div id="login-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in">
         <div class="bg-stone-900 rounded-2xl border border-amber-600/30 shadow-2xl p-8 w-full max-w-sm relative">
             <button onclick="window.app.closeLoginModal()" class="absolute right-4 top-4 text-stone-500 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
             
-            <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="flex items-center justify-center gap-3 mb-6">
                 <div class="bg-amber-500/10 p-3 rounded-full border border-amber-500/20">
                     <i data-lucide="lock" class="text-amber-500 w-8 h-8"></i>
                 </div>
@@ -154,18 +177,30 @@
             
             <h3 class="text-2xl font-bold text-center text-white brand-font mb-6">Acceso Admin</h3>
             
-            <form onsubmit="event.preventDefault(); window.app.loginAdmin();" class="space-y-6">
+            <form onsubmit="event.preventDefault(); window.app.loginAdmin();" class="space-y-4">
                 <div>
-                    <input type="password" id="admin-password" autofocus
-                        class="w-full bg-stone-950 border border-stone-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-500 outline-none placeholder-stone-600 text-center text-lg tracking-widest"
-                        placeholder="••••••••">
-                    <p id="login-error" class="text-red-500 text-xs mt-3 hidden flex items-center justify-center gap-1 font-medium bg-red-500/10 py-1 rounded">
-                        <i data-lucide="alert-circle" class="w-3 h-3"></i> Contraseña incorrecta
-                    </p>
+                    <label class="block text-xs uppercase tracking-wider text-stone-500 mb-2 font-bold ml-1">Usuario</label>
+                    <input type="text" id="admin-username" autofocus
+                        class="w-full bg-stone-950 border border-stone-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-500 outline-none placeholder-stone-600 text-lg tracking-wide"
+                        placeholder="Nombre de usuario">
                 </div>
-                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded-lg transition-colors shadow-lg shadow-amber-900/20 uppercase tracking-wide">
-                    Entrar
-                </button>
+                
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-stone-500 mb-2 font-bold ml-1">Contraseña</label>
+                    <input type="password" id="admin-password"
+                        class="w-full bg-stone-950 border border-stone-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-500 outline-none placeholder-stone-600 text-lg tracking-widest"
+                        placeholder="••••••••">
+                </div>
+
+                <p id="login-error" class="text-red-500 text-xs mt-2 hidden flex items-center justify-center gap-1 font-medium bg-red-500/10 py-2 rounded">
+                    <i data-lucide="alert-circle" class="w-3 h-3"></i> Usuario o contraseña incorrectos
+                </p>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded-lg transition-colors shadow-lg shadow-amber-900/20 uppercase tracking-wide">
+                        Entrar
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -260,10 +295,10 @@
             </div>
 
             <div class="flex gap-3">
-                <button onclick="window.app.closeCloseModal()" class="flex-1 bg-stone-800 hover:bg-stone-700 text-white font-bold py-3 rounded-lg transition-colors">
+                <button id="btn-cancel-close" onclick="window.app.closeCloseModal()" class="flex-1 bg-stone-800 hover:bg-stone-700 text-white font-bold py-3 rounded-lg transition-colors">
                     Cancelar
                 </button>
-                <button onclick="window.app.confirmCloseTable()" class="flex-1 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded-lg transition-colors shadow-[0_4px_0_rgb(180,83,9)] active:shadow-none active:translate-y-[4px]">
+                <button id="btn-confirm-close" onclick="window.app.confirmCloseTable()" class="flex-1 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded-lg transition-colors shadow-[0_4px_0_rgb(180,83,9)] active:shadow-none active:translate-y-[4px]">
                     Sí, Guardar
                 </button>
             </div>
@@ -300,13 +335,11 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script type="module">
-        // USAMOS VERSIÓN ESTABLE 10.7.1 PARA TODOS LOS MÓDULOS
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, writeBatch, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
-        // TU CONFIGURACIÓN REAL DE FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDWjJl_DxT4YV4IOcw1EpxyRAlqMswcxg4",
             authDomain: "barbarazo-21337.firebaseapp.com",
@@ -317,50 +350,73 @@
             measurementId: "G-GEXNC2ET1H"
         };
 
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Añadido analytics aunque no es crítico para el funcionamiento
+        const analytics = getAnalytics(app); 
         const auth = getAuth(app);
         const db = getFirestore(app);
         
-        // Identificador estático para la colección de datos
-        const appId = 'barbarazo_data';
-
         let state = {
             user: null,
             isAdmin: false,
+            adminLabel: '', 
             tables: [],
             history: [],
             showHistory: false,
-            tempAction: null 
+            tempAction: null,
+            isProcessing: false
         };
 
         const App = {
             
             showLoginModal: () => {
                 document.getElementById('login-modal').classList.remove('hidden');
-                setTimeout(() => document.getElementById('admin-password').focus(), 100);
+                setTimeout(() => document.getElementById('admin-username').focus(), 100);
             },
             
             closeLoginModal: () => {
                 document.getElementById('login-modal').classList.add('hidden');
                 document.getElementById('login-error').classList.add('hidden');
                 document.getElementById('admin-password').value = '';
+                document.getElementById('admin-username').value = '';
             },
 
-            loginAdmin: () => {
+            loginAdmin: async () => {
+                const username = document.getElementById('admin-username').value.trim().toLowerCase();
                 const pass = document.getElementById('admin-password').value;
-                if (pass === 'admin123') {
-                    state.isAdmin = true;
-                    App.closeLoginModal();
-                    renderUI();
-                } else {
-                    document.getElementById('login-error').classList.remove('hidden');
+                const btn = document.querySelector('#login-modal button[type="submit"]');
+                const errorMsg = document.getElementById('login-error');
+                
+                btn.disabled = true;
+                btn.innerText = "Verificando...";
+                errorMsg.classList.add('hidden');
+
+                try {
+                    const usersRef = collection(db, 'users');
+                    const q = query(usersRef, where('username', '==', username), where('password', '==', pass));
+                    const querySnapshot = await getDocs(q);
+
+                    if (!querySnapshot.empty) {
+                        const userData = querySnapshot.docs[0].data();
+                        state.isAdmin = true;
+                        state.adminLabel = userData.label || 'Admin'; 
+                        
+                        App.closeLoginModal();
+                        renderUI();
+                    } else {
+                        errorMsg.classList.remove('hidden');
+                    }
+                } catch (e) {
+                    console.error("Error login:", e);
+                    alert("Error de conexión. Verifica si tu usuario tiene permisos.");
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "Entrar";
                 }
             },
 
             logoutAdmin: () => {
                 state.isAdmin = false;
+                state.adminLabel = '';
                 renderUI();
             },
 
@@ -405,11 +461,13 @@
                 if (table) {
                     const newPlayers = [...table.players];
                     newPlayers[playerIndex].debt = (newPlayers[playerIndex].debt || 0) + amount;
+                    // Aumentar contador de partidas perdidas
+                    newPlayers[playerIndex].losses = (newPlayers[playerIndex].losses || 0) + 1;
                     
                     App.closeDebtModal();
                     
                     try {
-                        await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tables', tableId), { players: newPlayers });
+                        await updateDoc(doc(db, 'tables', tableId), { players: newPlayers });
                     } catch (err) {
                         console.error("Error updating debt:", err);
                     }
@@ -473,7 +531,7 @@
                 App.closePayModal();
                 
                 try {
-                    await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tables', tableId), { players: newPlayers });
+                    await updateDoc(doc(db, 'tables', tableId), { players: newPlayers });
                 } catch (err) {
                     console.error("Error updating payment:", err);
                 }
@@ -500,37 +558,57 @@
             },
 
             confirmCloseTable: async () => {
-                if (!state.tempAction || state.tempAction.type !== 'close') return;
+                if (!state.tempAction || state.tempAction.type !== 'close' || state.isProcessing) return;
                 
+                state.isProcessing = true;
+                const btn = document.getElementById('btn-confirm-close');
+                const originalText = btn.innerText;
+                btn.innerText = "Guardando...";
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+
                 const { tableId } = state.tempAction;
                 const table = state.tables.find(t => t.id === tableId);
                 
                 if (table) {
                     const totalPaid = table.players.reduce((acc, p) => acc + (p.paid || 0), 0);
                     
-                    App.closeCloseModal();
-
                     try {
-                        await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'history'), {
+                        const batch = writeBatch(db);
+
+                        const historyRef = doc(collection(db, 'history'));
+                        batch.set(historyRef, {
                             ...table,
                             completedAt: new Date().toLocaleTimeString(),
                             date: new Date().toLocaleDateString(),
                             closedAtTimestamp: Date.now(),
-                            totalPaid
+                            totalPaid,
+                            closedBy: state.adminLabel || 'Sistema'
                         });
-                        
-                        await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tables', tableId), {
+
+                        const tableRef = doc(db, 'tables', tableId);
+                        // Resetear también el contador de pérdidas
+                        batch.update(tableRef, {
                             status: 'available',
-                            players: Array(4).fill(null).map((_, i) => ({ id: `reset_${i}`, name: "", debt: 0, paid: 0 })),
+                            players: Array(4).fill(null).map((_, i) => ({ id: `reset_${i}`, name: "", debt: 0, paid: 0, losses: 0 })),
                             startTime: null
                         });
+
+                        await batch.commit();
+                        App.closeCloseModal();
+
                     } catch (err) {
                         console.error("Error closing table:", err);
+                        alert("Error al guardar. Verifica tu conexión.");
+                    } finally {
+                        state.isProcessing = false;
+                        btn.innerText = originalText;
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
                     }
+                } else {
+                    state.isProcessing = false;
                 }
             },
 
-            // --- GESTIÓN ELIMINAR ---
             openDeleteModal: (tableId) => {
                 state.tempAction = { tableId, type: 'delete' };
                 document.getElementById('delete-modal').classList.remove('hidden');
@@ -548,7 +626,7 @@
                 App.closeDeleteModal();
                 
                 try {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tables', tableId));
+                    await deleteDoc(doc(db, 'tables', tableId));
                 } catch (e) { console.error("Error deleting table:", e); }
             },
 
@@ -558,10 +636,10 @@
                 const name = input.value.trim() || `Mesa ${state.tables.length + 1}`;
                 
                 try {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tables'), {
+                    await addDoc(collection(db, 'tables'), {
                         name: name,
                         status: 'available',
-                        players: Array(4).fill(null).map((_, i) => ({ id: `new_${i}`, name: "", debt: 0, paid: 0 })),
+                        players: Array(4).fill(null).map((_, i) => ({ id: `new_${i}`, name: "", debt: 0, paid: 0, losses: 0 })),
                         startTime: null,
                         createdAt: Date.now()
                     });
@@ -582,21 +660,17 @@
                     updates.startTime = new Date().toLocaleTimeString();
                 }
 
-                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'tables', tableId), updates);
+                await updateDoc(doc(db, 'tables', tableId), updates);
             },
         };
 
         window.app = App;
 
-        // AUTHENTICATION LOGIC
         const initAuth = async () => {
-            // En un entorno standalone, intentamos entrar anónimamente directamente
-            // Si el usuario necesita auth más robusta (email/pass) habría que implementarlo aquí
             try {
                 await signInAnonymously(auth);
             } catch (error) {
                 console.error("Error signing in anonymously:", error);
-                // Si falla el auth, la app mostrará "Desconectado"
             }
         };
         initAuth();
@@ -621,13 +695,13 @@
         });
 
         function initDataListeners() {
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'tables'), (snapshot) => {
+            onSnapshot(collection(db, 'tables'), (snapshot) => {
                 state.tables = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
                     .sort((a, b) => a.createdAt - b.createdAt);
                 renderUI();
             });
 
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'history'), (snapshot) => {
+            onSnapshot(collection(db, 'history'), (snapshot) => {
                 state.history = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
                     .sort((a, b) => b.closedAtTimestamp - a.closedAtTimestamp);
                 renderUI();
@@ -635,10 +709,15 @@
         }
 
         function renderUI() {
-            const { isAdmin, showHistory, tables, history } = state;
+            const { isAdmin, showHistory, tables, history, adminLabel } = state;
             
             document.getElementById('admin-controls').classList.toggle('hidden', !isAdmin);
             document.getElementById('btn-login').classList.toggle('hidden', isAdmin);
+            
+            if (isAdmin) {
+                document.getElementById('admin-badge').innerText = `HOLA, ${adminLabel}`;
+            }
+
             document.getElementById('action-bar').classList.toggle('hidden', !isAdmin || showHistory);
             document.getElementById('dashboard-stats').classList.toggle('hidden', !isAdmin);
             document.getElementById('history-view').classList.toggle('hidden', !showHistory);
@@ -734,10 +813,12 @@
                         ${table.players.map((p, idx) => renderPlayerRow(table.id, idx, p, state.isAdmin)).join('')}
                     </div>
 
+                    ${state.isAdmin ? `
                     <div class="px-4 py-4 bg-stone-950/50 border-t border-stone-800 rounded-b-xl flex justify-between items-center">
                         <span class="text-xs text-stone-500 uppercase font-bold tracking-wider">Deuda Mesa</span>
                         <span class="font-mono font-bold text-lg ${totalDebt > 0 ? 'text-red-500' : 'text-stone-600'}">$${totalDebt}</span>
                     </div>
+                    ` : ''}
                 </div>
                 `;
             }).join('');
@@ -746,6 +827,7 @@
         function renderPlayerRow(tableId, idx, p, isAdmin) {
             const hasName = p.name && p.name !== "";
             const debt = p.debt || 0;
+            const losses = p.losses || 0;
             
             return `
             <div class="flex items-center justify-between bg-stone-950/40 p-2 rounded-lg border border-stone-800/50 hover:border-stone-700 transition-colors group">
@@ -765,8 +847,11 @@
                 ${hasName ? `
                 <div class="flex items-center gap-3 pl-2">
                     <div class="text-right flex-shrink-0">
-                        <div class="text-sm font-mono font-bold ${debt > 0 ? 'text-red-500' : 'text-stone-600'}">$${debt}</div>
-                        ${isAdmin ? `<div class="text-[10px] text-stone-600">Pagado: $${p.paid || 0}</div>` : ''}
+                        ${isAdmin 
+                            ? `<div class="text-sm font-mono font-bold ${debt > 0 ? 'text-red-500' : 'text-stone-600'}">$${debt}</div>
+                               <div class="text-[10px] text-stone-600">Pagado: $${p.paid || 0}</div>`
+                            : `<div class="text-sm font-medium ${losses > 0 ? 'text-red-400' : 'text-stone-500'}">Perdidas: ${losses}</div>`
+                        }
                     </div>
                     ${isAdmin ? `
                     <div class="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
@@ -787,18 +872,35 @@
 
         function renderHistory() {
             const list = document.getElementById('history-list');
+            const header = document.getElementById('history-header');
+            
+            // Render Header according to role
+            header.innerHTML = `
+                <th class="px-6 py-4">Mesa</th>
+                <th class="px-6 py-4">Fecha/Hora</th>
+                <th class="px-6 py-4">Atendido Por</th>
+                <th class="px-6 py-4">Jugadores</th>
+                ${state.isAdmin ? '<th class="px-6 py-4 text-right">Total</th>' : ''}
+            `;
+
             if (state.history.length === 0) {
-                list.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-stone-600 font-medium">No hay registros en el libro aún</td></tr>`;
+                list.innerHTML = `<tr><td colspan="${state.isAdmin ? 5 : 4}" class="px-6 py-12 text-center text-stone-600 font-medium">No hay registros en el libro aún</td></tr>`;
                 return;
             }
+            
             list.innerHTML = state.history.map(h => `
                 <tr class="border-b border-stone-800 hover:bg-stone-800/30 transition-colors">
                     <td class="px-6 py-4 font-bold text-white brand-font">${h.name}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-stone-500 font-mono">${h.date}<br>${h.completedAt}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded bg-stone-800 border border-stone-700 text-xs text-amber-500 font-bold uppercase tracking-wider">
+                            ${h.closedBy || 'Sistema'}
+                        </span>
+                    </td>
                     <td class="px-6 py-4 max-w-xs truncate text-stone-400 text-sm">
                         ${h.players ? h.players.filter(p => p.name).map(p => p.name).join(", ") : "Sin datos"}
                     </td>
-                    <td class="px-6 py-4 text-right text-amber-500 font-mono font-bold text-lg">$${h.totalPaid || 0}</td>
+                    ${state.isAdmin ? `<td class="px-6 py-4 text-right text-amber-500 font-mono font-bold text-lg">$${h.totalPaid || 0}</td>` : ''}
                 </tr>
             `).join('');
         }
